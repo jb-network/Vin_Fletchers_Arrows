@@ -6,25 +6,35 @@
 // Add a get cost method that returns its cost as a float based on the arrow attributes selected by the user
 
 //Main
-
-//TEMP TESTING (REMOVE)
-Arrow a = StageBuildArrow();
-Arrow b = StageBuildArrow();
-Console.WriteLine($"{b._length}, {b._Fletching}, {b._ArrowHead}");
-Console.WriteLine($"{a._length}, {a._Fletching}, {a._ArrowHead}");
+Console.WriteLine("Welcome to Vin Fleatcher's High End Arrows");
+Console.WriteLine("Fabulous Arrows for Fabulous Rangers!");
+Console.WriteLine("-----------------------------------------------------------");
+Console.WriteLine("Press any key to build the Arrow of your dream");
 Console.ReadKey();
-// TEMP TESTING (REMOVE)
+Console.Clear();
+
+
+// Call Arrow Factory, this allows more than one instance of arrow to be created or added later
+Arrow ArrowOne = ArrowFactory();
+Console.WriteLine($"test : {ArrowOne._ArrowHead}");
+
 
 //Methods
-// This allows more than one arrow to be created with new information
-Arrow StageBuildArrow()
+
+// ArrowFactory Method (Method of methods) to return new arrow:
+// This is needed so that main can call as many arrows as is needed (if needed)
+Arrow ArrowFactory()
 {
-    (Arrowhead _Arrowhead, Fletching _Fletching, float Length) CustomArrow = BuildArrow();
-    return new Arrow(CustomArrow._Arrowhead, CustomArrow._Fletching, CustomArrow.Length);
+    Console.WriteLine(" Arrow Factory 3000: Ready to take your order!");
+    Arrowhead ArrowHead = BuildArrowHead(); //must be set to Arrowhead because of the enum
+    Fletchingmaterial FletchingMaterial = BuildFletchingMaterial(); //must be set to Fletchingmaterial because of the enum
+    float TotalLength = BuildTotalLength();
+    return new Arrow(ArrowHead, FletchingMaterial, TotalLength);
 }
 
-(Arrowhead, Fletching, float Length) BuildArrow()
-    
+
+//must be set to Arrowhead because of the enum
+Arrowhead BuildArrowHead() 
 {
     //Get user info for Arrowhead
     string arrow_info = "null";
@@ -33,14 +43,18 @@ Arrow StageBuildArrow()
         Console.WriteLine("Please enter the Arrowhead type that you would like to use on your custom arrows:  Steel,Wood, or Obsidian");
         arrow_info = Console.ReadLine().ToLower();
     }
-    Arrowhead _Arrowhead = arrow_info switch
+    Arrowhead head = arrow_info switch //must be set to Arrowhead because of the enum
     {
         //standardized input using enum
         "steel" => Arrowhead.Steel,
         "wood" => Arrowhead.Wood,
         "obsidian" => Arrowhead.Obsidian,
     };
- 
+    return head;
+}
+
+Fletchingmaterial BuildFletchingMaterial() //must be set to Fletchingmaterial because of the enum
+{
     // Get user info for Fletching type
     string fletching_info = "null";
     while (fletching_info != "plastic" && fletching_info != "turkey feathers" && fletching_info != "goose feathers")
@@ -48,42 +62,49 @@ Arrow StageBuildArrow()
         Console.WriteLine("Please enter the Fletching type you would like to use on your custom arrows: Plastic, Turkey Feathers, or Goose Feathers");
         fletching_info = Console.ReadLine().ToLower();
     }
-    Fletching _Fletching = fletching_info switch
+    Fletchingmaterial fletch = fletching_info switch  //must be set to Fletchingmaterial because of the enum
     {
         //standardized input using enum
-        "plastic" => Fletching.Plastic,
-        "turkey feathers" => Fletching.TurkeyFeathers,
-        "goose feathers" => Fletching.GooseFeathers,
+        "plastic" => Fletchingmaterial.Plastic,
+        "turkey feathers" => Fletchingmaterial.TurkeyFeathers,
+        "goose feathers" => Fletchingmaterial.GooseFeathers,
     };
+    return fletch;
+}
 
+float BuildTotalLength()
+{
     //Get user info for Arrow Length
-    float _Length;
+    float Length;
     do
     {
         Console.WriteLine("Please enter the length that would like your custom arrows to be:  Between 60 and 100 cm");
-        _Length = Convert.ToSingle(Console.ReadLine());
+        Length = Convert.ToSingle(Console.ReadLine());
     }
-    while (_Length < 60 || _Length > 100);
-    return (_Arrowhead, _Fletching, _Length); 
-
-
+    while (Length < 60 || Length > 100);
+    return Length;
 }
 
-//Class
+
 class Arrow
 {
-    public Arrowhead _ArrowHead;
-    public Fletching _Fletching;
-    public float _length;
+    //must be set to Arrowhead because of the enum
+    //must be set to Fletchingmaterial because of enum 
+    public Arrowhead _ArrowHead; 
+    public Fletchingmaterial _FletchingMaterial; 
+    public float _TotalLength;
 
-    public Arrow(Arrowhead ArrowHead, Fletching Fletching, float Length)
+    //must be set to Arrowhead because of the enum
+    //must be set to Fletchingmaterial because of enum 
+    public Arrow(Arrowhead ArrowHead, Fletchingmaterial FletchingMaterial, float TotalLength)
     {
         _ArrowHead = ArrowHead;
-        _Fletching = Fletching;
-        _length = Length;
+        _FletchingMaterial = FletchingMaterial;
+        _TotalLength = TotalLength;
     }
+//Method for total price
 }
 
-//Enumerations
+//Enum
 enum Arrowhead { Steel, Wood, Obsidian }
-enum Fletching { Plastic, TurkeyFeathers, GooseFeathers }
+enum Fletchingmaterial { Plastic, TurkeyFeathers, GooseFeathers }
