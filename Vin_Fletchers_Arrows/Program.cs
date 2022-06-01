@@ -16,11 +16,17 @@ Console.WriteLine(a._ArrowHead);
 //Method
 
 
+
 //Get user info for Arrowhead
+Console.WriteLine("Please enter the Arrowhead type that you would like to use on your custom arrows: ");
+
 
 // Get user info for Fletching type
+Console.WriteLine("Please enter the Fletching type you would like to use on your custom arrows: ");
+
 
 //Get user info for Arrow Length
+
 
 //Class
 class Arrow
