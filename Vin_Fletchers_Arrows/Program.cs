@@ -7,15 +7,22 @@
 
 //Main
 
-
-(Arrowhead _Arrowhead, Fletching _Fletching, float Length) CustomArrow = BuildArrow();
-//Pass CustomArrow to  Arrow Class
-//Arrow a = new Arrow(ArrowHead, Fletching, .005f);
-Arrow b = new Arrow(CustomArrow._Arrowhead, CustomArrow._Fletching, CustomArrow.Length);
-
+//TEMP TESTING (REMOVE)
+Arrow a = StageBuildArrow();
+Arrow b = StageBuildArrow();
 Console.WriteLine($"{b._length}, {b._Fletching}, {b._ArrowHead}");
+Console.WriteLine($"{a._length}, {a._Fletching}, {a._ArrowHead}");
+Console.ReadKey();
+// TEMP TESTING (REMOVE)
 
 //Methods
+// This allows more than one arrow to be created with new information
+Arrow StageBuildArrow()
+{
+    (Arrowhead _Arrowhead, Fletching _Fletching, float Length) CustomArrow = BuildArrow();
+    return new Arrow(CustomArrow._Arrowhead, CustomArrow._Fletching, CustomArrow.Length);
+}
+
 (Arrowhead, Fletching, float Length) BuildArrow()
     
 {
@@ -28,6 +35,7 @@ Console.WriteLine($"{b._length}, {b._Fletching}, {b._ArrowHead}");
     }
     Arrowhead _Arrowhead = arrow_info switch
     {
+        //standardized input using enum
         "steel" => Arrowhead.Steel,
         "wood" => Arrowhead.Wood,
         "obsidian" => Arrowhead.Obsidian,
@@ -42,6 +50,7 @@ Console.WriteLine($"{b._length}, {b._Fletching}, {b._ArrowHead}");
     }
     Fletching _Fletching = fletching_info switch
     {
+        //standardized input using enum
         "plastic" => Fletching.Plastic,
         "turkey feathers" => Fletching.TurkeyFeathers,
         "goose feathers" => Fletching.GooseFeathers,
