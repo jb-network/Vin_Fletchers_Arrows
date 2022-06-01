@@ -6,7 +6,37 @@
 // Add a get cost method that returns its cost as a float based on the arrow attributes selected by the user
 
 //Main
+string arrowHead = "Steel";
+string fletching = "Plastic";
+Arrow a = new Arrow(ArrowHead, Fletching, .005f);
+
+Console.WriteLine(a._ArrowHead);
+ Console.ReadKey();
 
 //Method
 
+
+//Get user info for Arrowhead
+
+// Get user info for Fletching type
+
+//Get user info for Arrow Length
+
+//Class
+class Arrow
+{
+    public string _ArrowHead;
+    public string _Fletching;
+    public float _length;
+
+    public Arrow(string ArrowHead, string Fletching, float Length)
+    {
+        _ArrowHead = ArrowHead;
+        _Fletching = Fletching;
+        _length = Length;
+    }
+}
+
 //Enumerations
+enum Arrowhead { Steel, Wood, Obsidian }
+enum Fletching { Plastic, TurkeyFeathers, GooseFeathers }
