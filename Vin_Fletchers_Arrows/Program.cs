@@ -14,10 +14,11 @@ FinalCloseOut(ArrowOne, ArrowCost);
 //Methods
 void StartMenu()
 {
-    Console.WriteLine("Welcome to Vin Fleatcher's High End Arrows");
+    char face = ((char)2);
+    Console.WriteLine("***************Arrow Factory 3000: Ready to take your order*************");
+    Console.WriteLine("\nWelcome to Vin Fleatcher's High End Arrows");
     Console.WriteLine("Fabulous Arrows for Fabulous Rangers!");
-    Console.WriteLine("-----------------------------------------------------------");
-    Console.WriteLine("Press any key to build the arrows of your dreams");
+    Console.WriteLine("\n"+ face +" Press any key to build the arrows of your dreams " +  face);
     Console.ReadKey();
     Console.Clear();
 }
@@ -26,7 +27,7 @@ void StartMenu()
 // This is needed so that main can call as many arrows as is needed (if needed)
 Arrow ArrowFactory()
 {
-    Console.WriteLine("*******************Arrow Factory 3000: Ready to take your order******************");
+    Console.WriteLine("*******************Arrow Factory 3000: Building order******************");
     Arrowhead ArrowHead = BuildArrowHead(); //must be set to Arrowhead because of the enum
     Fletchingmaterial FletchingMaterial = BuildFletchingMaterial(); //must be set to Fletchingmaterial because of the enum
     float TotalLength = BuildTotalLength();
