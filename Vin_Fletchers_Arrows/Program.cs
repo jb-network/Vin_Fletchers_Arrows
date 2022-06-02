@@ -6,20 +6,22 @@
 // Add a get cost method that returns its cost as a float based on the arrow attributes selected by the user
 
 //Main
-Console.WriteLine("Welcome to Vin Fleatcher's High End Arrows");
-Console.WriteLine("Fabulous Arrows for Fabulous Rangers!");
-Console.WriteLine("-----------------------------------------------------------");
-Console.WriteLine("Press any key to build the Arrow of your dream");
-Console.ReadKey();
-Console.Clear();
-
-
-// Call Arrow Factory, this allows more than one instance of arrow to be created or added later
-Arrow ArrowOne = ArrowFactory();
-Console.WriteLine($"test : {ArrowOne._ArrowHead}");
-
+StartMenu();
+Arrow ArrowOne = ArrowFactory(); // Call Arrow Factory, this allows more than one instance of arrow to be created or added later
+float ArrowCost = ArrowOne.GetCost();
+FinalCloseOut(ArrowOne, ArrowCost);
 
 //Methods
+
+void StartMenu()
+{
+    Console.WriteLine("Welcome to Vin Fleatcher's High End Arrows");
+    Console.WriteLine("Fabulous Arrows for Fabulous Rangers!");
+    Console.WriteLine("-----------------------------------------------------------");
+    Console.WriteLine("Press any key to build the Arrow of your dream");
+    Console.ReadKey();
+    Console.Clear();
+}
 
 // ArrowFactory Method (Method of methods) to return new arrow:
 // This is needed so that main can call as many arrows as is needed (if needed)
@@ -31,7 +33,6 @@ Arrow ArrowFactory()
     float TotalLength = BuildTotalLength();
     return new Arrow(ArrowHead, FletchingMaterial, TotalLength);
 }
-
 
 //must be set to Arrowhead because of the enum
 Arrowhead BuildArrowHead() 
@@ -85,7 +86,19 @@ float BuildTotalLength()
     return Length;
 }
 
-
+void FinalCloseOut(Arrow arrowOne, float arrowCost)
+{
+    Console.WriteLine($"The arrow you created has the following characteristics: " +
+    $"The Arrowhead is made of {ArrowOne._ArrowHead}" +
+    $"The Fletching is made of {ArrowOne._FletchingMaterial} " +
+    $"The Shaft is {ArrowOne._TotalLength}");
+    Console.WriteLine($"This type of custom arrow costs a total of {ArrowCost} gold per arrow");
+    Console.Write($"How many of these arrows would you like to order?: ");
+    float TotalCost = Convert.ToSingle(Console.ReadLine());
+    TotalCost *= ArrowCost;
+    Console.Write($"The total amount due for these luxury custom arrows: {TotalCost} gold");
+    Console.WriteLine("Thanks for shopping at Vin Fleatchers!");
+}
 class Arrow
 {
     //must be set to Arrowhead because of the enum
@@ -102,7 +115,26 @@ class Arrow
         _FletchingMaterial = FletchingMaterial;
         _TotalLength = TotalLength;
     }
-//Method for total price
+    //Method for total price
+    public float GetCost()
+    {
+        float HeadCost = _ArrowHead switch
+        {
+            Arrowhead.Steel => 10,
+            Arrowhead.Wood => 3,
+            Arrowhead.Obsidian => 5
+        };
+
+        float FletchingCost = _FletchingMaterial switch
+        {
+            Fletchingmaterial.Plastic => 10,
+            Fletchingmaterial.TurkeyFeathers => 5,
+            Fletchingmaterial.GooseFeathers => 3,
+        };
+
+        float LengthCost = .05f * _TotalLength;
+        return HeadCost + FletchingCost + LengthCost;
+    }
 }
 
 //Enum
