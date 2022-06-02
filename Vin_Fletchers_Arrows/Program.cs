@@ -12,13 +12,12 @@ float ArrowCost = ArrowOne.GetCost();
 FinalCloseOut(ArrowOne, ArrowCost);
 
 //Methods
-
 void StartMenu()
 {
     Console.WriteLine("Welcome to Vin Fleatcher's High End Arrows");
     Console.WriteLine("Fabulous Arrows for Fabulous Rangers!");
     Console.WriteLine("-----------------------------------------------------------");
-    Console.WriteLine("Press any key to build the Arrow of your dream");
+    Console.WriteLine("Press any key to build the arrows of your dreams");
     Console.ReadKey();
     Console.Clear();
 }
@@ -27,7 +26,7 @@ void StartMenu()
 // This is needed so that main can call as many arrows as is needed (if needed)
 Arrow ArrowFactory()
 {
-    Console.WriteLine(" Arrow Factory 3000: Ready to take your order!");
+    Console.WriteLine("*******************Arrow Factory 3000: Ready to take your order******************");
     Arrowhead ArrowHead = BuildArrowHead(); //must be set to Arrowhead because of the enum
     Fletchingmaterial FletchingMaterial = BuildFletchingMaterial(); //must be set to Fletchingmaterial because of the enum
     float TotalLength = BuildTotalLength();
@@ -41,7 +40,7 @@ Arrowhead BuildArrowHead()
     string arrow_info = "null";
     while (arrow_info != "steel" && arrow_info != "wood" && arrow_info != "obsidian")
     {
-        Console.WriteLine("Please enter the Arrowhead type that you would like to use on your custom arrows:  Steel,Wood, or Obsidian");
+        Console.WriteLine("\nPlease enter the arrowhead type for your custom arrows (Steel,Wood, or Obsidian): ");
         arrow_info = Console.ReadLine().ToLower();
     }
     Arrowhead head = arrow_info switch //must be set to Arrowhead because of the enum
@@ -60,7 +59,7 @@ Fletchingmaterial BuildFletchingMaterial() //must be set to Fletchingmaterial be
     string fletching_info = "null";
     while (fletching_info != "plastic" && fletching_info != "turkey feathers" && fletching_info != "goose feathers")
     {
-        Console.WriteLine("Please enter the Fletching type you would like to use on your custom arrows: Plastic, Turkey Feathers, or Goose Feathers");
+        Console.WriteLine("\nPlease enter the Fletching type for your custom arrows (Plastic, Turkey Feathers, or Goose Feathers): ");
         fletching_info = Console.ReadLine().ToLower();
     }
     Fletchingmaterial fletch = fletching_info switch  //must be set to Fletchingmaterial because of the enum
@@ -79,7 +78,7 @@ float BuildTotalLength()
     float Length;
     do
     {
-        Console.WriteLine("Please enter the length that would like your custom arrows to be:  Between 60 and 100 cm");
+        Console.WriteLine("\nPlease enter the shaft length of your custom arrows (Between 60 and 100 cm): ");
         Length = Convert.ToSingle(Console.ReadLine());
     }
     while (Length < 60 || Length > 100);
@@ -88,16 +87,20 @@ float BuildTotalLength()
 
 void FinalCloseOut(Arrow arrowOne, float arrowCost)
 {
+    Console.Clear();
+    Console.WriteLine("*******************Arrow Factory 3000: Processing order******************");
     Console.WriteLine($"The arrow you created has the following characteristics: " +
-    $"The Arrowhead is made of {ArrowOne._ArrowHead}" +
-    $"The Fletching is made of {ArrowOne._FletchingMaterial} " +
-    $"The Shaft is {ArrowOne._TotalLength}");
-    Console.WriteLine($"This type of custom arrow costs a total of {ArrowCost} gold per arrow");
-    Console.Write($"How many of these arrows would you like to order?: ");
+    $"\nThe Arrowhead is made of {ArrowOne._ArrowHead}" +
+    $"\nThe Fletching is made of {ArrowOne._FletchingMaterial} " +
+    $"\nThe Shaft is {ArrowOne._TotalLength} cm");
+    Console.WriteLine($"\nThis type of custom arrow costs a total of {ArrowCost} gold per arrow");
+    Console.Write($"\nHow many of these arrows would you like to order?: ");
     float TotalCost = Convert.ToSingle(Console.ReadLine());
     TotalCost *= ArrowCost;
-    Console.Write($"The total amount due for these luxury custom arrows: {TotalCost} gold");
-    Console.WriteLine("Thanks for shopping at Vin Fleatchers!");
+    Console.WriteLine($"\nThe total amount due for these luxury custom arrows: {TotalCost} gold");
+    Console.WriteLine("\nThanks for shopping at Vin Fleatchers!");
+    Console.WriteLine("\nPress any key to exit the Arrow Factory 3000");
+    Console.ReadKey();
 }
 class Arrow
 {
